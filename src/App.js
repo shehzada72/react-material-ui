@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Header, Footer} from "./layouts";
+import Exercises from "./components/excercises";
+import {muscles, exercises} from "./store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+        exercises,
+        category: '',
+        exercise: ''
+    };
+
+    getExercisesByMuscles = () => {
+        return Object.entries(
+            this.state.exercises.reduce((exercises, exercise) => {
+                const {muscles} = exercise;
+
+                exercises[muscles] = exercises[muscles]
+                    ? [...exercises[muscles], exercise]
+                    : [exercise];
+
+                return exercises;
+            }, {})
+        )
+    };
+
+    handleCategorySelect = category => {
+        this.setState({category})
+    };
+
+    handleExerciseSelect = id => {
+        this.setState((({exercises}) => ({
+            exercise: exercises.find(exercise => exercise.id === id)
+        })))
+    };
+
+    render() {
+        const exercises = this.getExercisesByMuscles();
+        const {category, exercise} = this.state;
+        return (
+            <>
+                <Header/>
+                <Exercises
+                    exercises={exercises}
+                    category={category}
+                    onExerciseSelect={this.handleExerciseSelect}
+                    exercise={exercise}
+                />
+                <Footer
+                    category={category}
+                    muscles={muscles}
+                    onSelect={this.handleCategorySelect}
+                />
+            </>
+        );
+    }
 }
 
 export default App;
