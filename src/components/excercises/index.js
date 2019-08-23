@@ -19,10 +19,16 @@ const Index = ({
                    exercises,
                    category,
                    onExerciseSelect,
-                   exercise}) => {
+                   exercise,
+                   onExerciseDelete,
+                   onExerciseEdit,
+                   editMode
+}) => {
     return (
         <Grid container>
             <LeftPane
+                onDelete={onExerciseDelete}
+                onEdit={onExerciseEdit}
                 category={category}
                 styles={styles}
                 exercises={exercises}
@@ -33,6 +39,7 @@ const Index = ({
                 styles={styles}
                 exercises={exercises}
                 exercise={exercise}
+                editMode={editMode}
             />
         </Grid>
     );

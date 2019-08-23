@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({onExerciseCreate}) => {
+const Header = ({onExerciseSubmit}) => {
     const classes = useStyles();
 
     return (
@@ -33,7 +33,7 @@ const Header = ({onExerciseCreate}) => {
                     Exercise Database
                 </Typography>
                 <CreateDialog
-                   onCreate={onExerciseCreate}
+                    onSubmit={onExerciseSubmit}
                 />
             </Toolbar>
         </AppBar>

@@ -5,8 +5,11 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import {Delete, Edit} from '@material-ui/icons';
+import IconButton from "@material-ui/core/IconButton";
 
-const LeftPane = ({styles, exercises, category, onSelect}) => {
+const LeftPane = ({styles, exercises, category, onSelect, onDelete, onEdit}) => {
 
     return (
         <Grid item sm>
@@ -27,6 +30,14 @@ const LeftPane = ({styles, exercises, category, onSelect}) => {
                                         primary={exercise.title}
                                         onClick={() => onSelect(exercise.id)}
                                     />
+                                    <ListItemSecondaryAction>
+                                        <IconButton onClick={() => onEdit(exercise.id)}>
+                                            <Edit/>
+                                        </IconButton>
+                                        <IconButton onClick={() => onDelete(exercise.id)}>
+                                            <Delete/>
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
                                 </ListItem>
                             )}
                         </List>
