@@ -16,7 +16,6 @@ const LeftPane = ({styles, exercises, category, onSelect}) => {
                     <React.Fragment key={index}>
                         <Typography
                             variant={'h6'}
-
                             style={{textTransform: 'capitalize'}}
                         >
                             {group}
