@@ -46,17 +46,20 @@ const Form = ({onSubmit, exercise}) => {
     const [values, setValues] = React.useState(initialValues);
 
     useEffect(() => {
-        setValues(initialValues)
-    }, [initialValues]);
+        if (exercise){
+            setValues(exercise)
+        }
+
+    }, [exercise]);
 
     const handleChange = ({target: {name, value}}) => {
         setValues({...values, [name]: value});
     };
 
-    const handleSubmit = values => {
+    const handleSubmit = () => {
         onSubmit({
+            id: values.title.toLowerCase().replace(/ /g, '-'),
             ...values,
-            id: values.title.toLowerCase().replace(/ /g, '-')
         });
         setValues({
             title: '',
@@ -105,8 +108,8 @@ const Form = ({onSubmit, exercise}) => {
             />
             <br/>
 
-            <Button onClick={handleSubmit} color="primary">
-                Create
+            <Button variant="contained" onClick={handleSubmit} color="primary">
+                {exercise ? 'Edit' : 'Create'}
             </Button>
         </form>
     );

@@ -4,12 +4,13 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Form from "./Form";
 
-const RightPane = ({styles, exercise, exercise: {id, title = 'Welcome!', description = 'Please select an exercise from the list'}, editMode}) => {
+const RightPane = ({classes, onSubmit, exercise, exercise: {id, title = 'Welcome!', description = 'Please select an exercise from the list'}, editMode}) => {
     return (
         <Grid item sm>
-            <Paper style={styles.Paper}>
+            <Paper className={classes.Paper}>
                 {editMode ?
                     <Form
+                        onSubmit={onSubmit}
                         exercise={exercise}
                     /> :
                     <>

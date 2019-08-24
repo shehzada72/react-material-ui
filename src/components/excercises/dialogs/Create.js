@@ -28,7 +28,6 @@ const Create = ({onSubmit}) => {
     };
 
 
-
     return (
         <div>
             <Fab onClick={handleClickOpen} aria-label="add" className={classes.fab}>
@@ -41,7 +40,7 @@ const Create = ({onSubmit}) => {
                         Please fill out the form below.
                     </DialogContentText>
                     <Form
-                        onSubmit={onSubmit}
+                        onSubmit={(exercise) => {setOpen(false); onSubmit(exercise)}}
                     />
                 </DialogContent>
             </Dialog>

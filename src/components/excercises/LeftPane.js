@@ -9,11 +9,11 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import {Delete, Edit} from '@material-ui/icons';
 import IconButton from "@material-ui/core/IconButton";
 
-const LeftPane = ({styles, exercises, category, onSelect, onDelete, onEdit}) => {
+const LeftPane = ({classes, exercises, category, onSelect, onDelete, onEdit}) => {
 
     return (
         <Grid item sm>
-            <Paper style={styles.Paper}>
+            <Paper className={classes.Paper}>
                 {exercises.map(([group, exercises], index) =>
                     !category || category === group ?
                     <React.Fragment key={index}>

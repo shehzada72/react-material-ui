@@ -34,19 +34,29 @@ class App extends Component {
 
     handleExerciseSelect = id => {
         this.setState((({exercises}) => ({
-            exercise: exercises.find(exercise => exercise.id === id)
+            exercise: exercises.find(exercise => exercise.id === id),
+            editMode: false
         })))
     };
 
     onExerciseSubmit = exercise => {
-      this.setState(({exercises}) => ({
-          exercises: [...exercises, exercise]
-      }))
+        this.setState(({exercises}) => {
+            let findExercise = exercises.find(ex => ex.id === exercise.id);
+
+            if (findExercise) {
+                exercises = exercises.filter(ex => ex.id !== exercise.id);
+            }
+
+            return ({
+                exercises: [...exercises, exercise]
+            })
+        })
     };
 
     onExerciseDelete = id => {
         this.setState(({exercises}) => ({
-            exercises: exercises.filter(ex => ex.id !== id)
+            exercises: exercises.filter(ex => ex.id !== id),
+            editMode: false
         }))
     };
 
@@ -73,6 +83,7 @@ class App extends Component {
                     onExerciseSelect={this.handleExerciseSelect}
                     exercise={exercise}
                     editMode={editMode}
+                    onExerciseSubmit={this.onExerciseSubmit}
                 />
                 <Footer
                     category={category}
